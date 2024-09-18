@@ -2,6 +2,7 @@ import React from "react";
 import frame from "../../public/assets/Frame 1.png";
 import Image from "next/image";
 import logo from "../../public/assets/logo.png";
+import Link from "next/link";
 
 const Login = () => {
   return (
@@ -39,7 +40,7 @@ const Login = () => {
           <div className="bg-black w-full h-[1px]"></div>
         </div>
         <p className="text-center">
-          Sudah punya akun ? <span className="text-[#39439D]">masuk</span>
+          Belum punya akun ? <span className="text-[#39439D]"><Link href="/register">Register</Link></span>
         </p>
       </div>
     </div>

@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 const menu = [
   {
     name: "Home",
-    icon: House, // Icon sebagai komponen
+    icon: House,
     link: "/home",
   },
   {
@@ -33,9 +33,12 @@ const AuthLayout = ({ children, page }) => {
 
   return (
     <div className="flex flex-col h-screen">
-      <nav className="h-[70px] border-b-2 p-2 text-[#39439D] font-semibold flex items-center justify-center">
-        {page}
+      {/* Nav tetap dengan ukuran yang sama */}
+      <nav className="h-[70px] md:h-[100px] border-b-2 p-4 md:p-2 text-[#39439D] font-semibold flex items-center justify-center">
+        <span className="text-xl md:text-2xl">{page}</span>
       </nav>
+
+      {/* Konten halaman */}
       <div className="flex-grow bg-[#F1F1FE] p-3 overflow-scroll">
         {children}
       </div>
@@ -47,11 +50,11 @@ const AuthLayout = ({ children, page }) => {
             <Link href={item.link} key={index}>
               <div
                 className={`flex flex-col items-center ${
-                  pathname === item.link ? "text-black" : "text-black/30"
-                } `}
+                  pathname === item.link ? "text-black" : "text-gray-300"
+                }`}
               >
                 <item.icon className="w-6 h-6" />
-                <span className="text-md font-semibold">{item.name}</span>
+                <span className="text-sm font-semibold">{item.name}</span>
               </div>
             </Link>
           ))}
