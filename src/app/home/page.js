@@ -24,6 +24,7 @@ const formatRupiah = (amount) => {
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState("semua");
+  const [searchTerm, setSearchTerm] = useState("");
   const { addToCart, cart } = useCartStore();
 
   const handleCardClick = (item) => {
@@ -37,10 +38,11 @@ export default function Home() {
     });
   };
 
-  const filteredItems =
-    selectedCategory === "semua"
-      ? foodAndDrinks
-      : foodAndDrinks.filter((item) => item.category === selectedCategory);
+  const filteredItems = foodAndDrinks.filter(
+    (item) =>
+      (selectedCategory === "semua" || item.category === selectedCategory) &&
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <AuthLayout page="Menu Cafe">
@@ -51,6 +53,8 @@ export default function Home() {
             type="text"
             className="w-full active:border-none focus:border-none focus:outline-none"
             placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <QrCode />
         </div>
@@ -103,39 +107,45 @@ export default function Home() {
         </div>
 
         <div className="mt-4">
-          <div className="grid grid-cols-2 gap-3">
-            {filteredItems.map((item, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl shadow-lg relative cursor-pointer"
-                onClick={() => handleCardClick(item)}
-              >
+          {filteredItems.length !== 0 ? (
+            <div className="grid grid-cols-2 gap-3">
+              {filteredItems.map((item, index) => (
                 <div
-                  className={`${
-                    cart.find((cartItem) => cartItem.id === item.id)
-                      ? "absolute right-5 top-5 bg-[#39439D] text-white w-10 h-10 rounded-full flex items-center justify-center"
-                      : "hidden"
-                  }`}
+                  key={index}
+                  className="bg-white rounded-xl shadow-lg relative cursor-pointer"
+                  onClick={() => handleCardClick(item)}
                 >
-                  {cart.find((cartItem) => cartItem.id === item.id)?.qty || 0}
-                </div>
-                <div className="p-3">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="h-[130px] w-full object-cover rounded-t-xl"
-                  />
-                  <div>
-                    <h1 className="text-lg font-semibold">{item.name}</h1>
-                    <p className="text-black/60">{item.category}</p>
-                    <span className="font-semibold">
-                      {formatRupiah(item.price)}
-                    </span>
+                  <div
+                    className={`${
+                      cart.find((cartItem) => cartItem.id === item.id)
+                        ? "absolute right-5 top-5 bg-[#39439D] text-white w-10 h-10 rounded-full flex items-center justify-center"
+                        : "hidden"
+                    }`}
+                  >
+                    {cart.find((cartItem) => cartItem.id === item.id)?.qty || 0}
+                  </div>
+                  <div className="p-3">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="h-[130px] w-full object-cover rounded-t-xl"
+                    />
+                    <div>
+                      <h1 className="text-lg font-semibold">{item.name}</h1>
+                      <p className="text-black/60">{item.category}</p>
+                      <span className="font-semibold">
+                        {formatRupiah(item.price)}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center font-bold text-xl mt-10">
+              Menu tidak ada!
+            </div>
+          )}
         </div>
       </div>
     </AuthLayout>

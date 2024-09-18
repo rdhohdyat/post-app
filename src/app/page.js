@@ -16,7 +16,7 @@ export default function Home() {
           <p>
             Atur menu dan transaksi dengan efisien, langsung dari aplikasi kami!
           </p>
-          <Link href="/home" className="bg-[#39439D] mt-2 font-semibold w-full text-white p-3 rounded-lg text-center">
+          <Link href="/login" className="bg-[#39439D] mt-2 font-semibold w-full text-white p-3 rounded-lg text-center">
             Mulai Sekarang
           </Link>
         </div>
