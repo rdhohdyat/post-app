@@ -46,7 +46,7 @@ export default function Home() {
 
   return (
     <AuthLayout page="Menu Cafe">
-      <div>
+      <div className="pb-20">
         <div className="flex items-center bg-white p-4 rounded-xl gap-2 border">
           <Search />
           <input

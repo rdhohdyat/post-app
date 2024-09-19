@@ -27,15 +27,11 @@ const Order = () => {
     setIsModalOpen(false);
   };
 
-
-
-  // Menentukan jumlah uang yang lebih besar dari total
   const additionalAmount = Math.ceil(total / 10000) * 10000;
 
   return (
     <AuthLayout page="Detail Pemesanan">
       <div className="flex flex-col h-full">
-        {/* Daftar order bisa di-scroll */}
         <div className="flex-grow overflow-scroll mb-[270px]">
           {cart.length !== 0 ? (
             <div className="flex flex-col gap-3">
@@ -85,7 +81,6 @@ const Order = () => {
           )}
         </div>
 
-        {/* Bagian checkout tetap di bagian bawah */}
         <div className="fixed bottom-0 left-0 right-0 bg-white shadow-t z-50 h-[270px] p-5">
           <div className="grid grid-cols-3 gap-3 mb-3">
             <div className="shadow p-2 text-white bg-[#39439D] rounded-xl flex flex-col items-center justify-center gap-2">
@@ -116,7 +111,6 @@ const Order = () => {
         </div>
       </div>
 
-      {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-5 rounded-xl shadow-lg w-[90%] max-w-md">
